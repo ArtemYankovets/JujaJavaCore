@@ -1,6 +1,7 @@
 package ua.com.juja.lab40;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class SimpleArrayList <E> implements SimpleList<E> {
 
@@ -28,10 +29,6 @@ public class SimpleArrayList <E> implements SimpleList<E> {
     public E get(int index) {
         rangeCheck(index);
         return data[index];
-    }
-
-    public Iterator<E> iterator() {
-        return null;
     }
 
     @Override
@@ -70,7 +67,76 @@ public class SimpleArrayList <E> implements SimpleList<E> {
     }
 
     /*BODY*/
+    public String toString(){
+        String rez = "[";
+        for (E elem : data){
+            rez += elem.toString();
+        }
+        return rez + "]";
+    }
 
+    public boolean equals(Object o){
+//        if(!super.equals(o)) return false;
+        if (this == o) return true;
+        if (o == null) return false;
+
+        SimpleArrayList<E> tmp;
+        if (!(o instanceof SimpleArrayList)) return false;
+
+        tmp = ((SimpleArrayList<E>) o);
+        if (this.size() != tmp.size()) return false;
+
+        boolean f = true;
+        for (int i = 0; i < size; i++) {
+            if (tmp.get(i) != this.get(i)) {
+                f =  false;
+                break;
+            }
+        }
+        return f;
+    }
+
+    public int hashCode(){
+        int hashCode = 1;
+        for (E e : data) {
+            hashCode = 31 * hashCode + (e == null ? 0 : e.hashCode());
+        }
+        return hashCode;
+    }
+
+    public Iterator<E> iterator() {
+        return new Itr();
+    }
+
+    private class Itr implements Iterator<E> {
+        int currentIndex = 0;
+        boolean f = false;
+
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex <= size;
+        }
+
+        @Override
+        public E next() {
+            if (hasNext()){
+                f = true;
+                return get(currentIndex++);
+            } else {
+                throw new NoSuchElementException();
+            }
+        }
+
+        @Override
+        public void remove() {
+            if (f){
+//                remove(currentIndex);
+            } else {
+                throw new IllegalStateException();
+            }
+        }
+    }
 }
 
 interface SimpleList<E> {
