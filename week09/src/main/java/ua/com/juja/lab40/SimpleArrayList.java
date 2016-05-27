@@ -3,7 +3,7 @@ package ua.com.juja.lab40;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SimpleArrayList <E> implements SimpleList<E> {
+public class SimpleArrayList<E> implements SimpleList<E> {
 
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
     private E[] data;
@@ -67,16 +67,20 @@ public class SimpleArrayList <E> implements SimpleList<E> {
     }
 
     /*BODY*/
-    public String toString(){
+    public String toString() {
         String rez = "[";
-        for (E elem : data){
-            rez += elem.toString();
+        for (int i = 0; i < size(); i++) {
+            if (i != size-1) {
+                rez += get(i) + ", ";
+            } else {
+                rez += get(i);
+            }
         }
         return rez + "]";
     }
 
-    public boolean equals(Object o){
-//        if(!super.equals(o)) return false;
+    public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null) return false;
 
@@ -89,14 +93,14 @@ public class SimpleArrayList <E> implements SimpleList<E> {
         boolean f = true;
         for (int i = 0; i < size; i++) {
             if (tmp.get(i) != this.get(i)) {
-                f =  false;
+                f = false;
                 break;
             }
         }
         return f;
     }
 
-    public int hashCode(){
+    public int hashCode() {
         int hashCode = 1;
         for (E e : data) {
             hashCode = 31 * hashCode + (e == null ? 0 : e.hashCode());
@@ -105,45 +109,56 @@ public class SimpleArrayList <E> implements SimpleList<E> {
     }
 
     public Iterator<E> iterator() {
-        return new Itr();
+        return new ArrayListIterator();
     }
 
-    private class Itr implements Iterator<E> {
-        int currentIndex = 0;
-        boolean f = false;
+    private class ArrayListIterator<E> implements Iterator<E> {
 
+        private int cursor;
+        private int lastRet;
+
+        public ArrayListIterator() {
+            this.cursor = 0;
+            this.lastRet = -1;
+        }
 
         @Override
         public boolean hasNext() {
-            return currentIndex <= size;
+            return cursor != size;
         }
 
         @Override
         public E next() {
-            if (hasNext()){
-                f = true;
-                return get(currentIndex++);
-            } else {
+            int i = cursor;
+            if (i >= size()) {
                 throw new NoSuchElementException();
             }
+            cursor = i + 1;
+            return (E) SimpleArrayList.this.get(lastRet = i);
         }
 
         @Override
         public void remove() {
-            if (f){
-//                remove(currentIndex);
-            } else {
+            if (lastRet < 0) {
                 throw new IllegalStateException();
             }
+            SimpleArrayList.this.remove(lastRet);
+            cursor = lastRet;
+            lastRet = -1;
         }
     }
 }
 
 interface SimpleList<E> {
     public boolean add(E newElement);
+
     public E get(int index);
+
     public Iterator<E> iterator();
+
     public int size();
+
     public boolean isEmpty();
+
     public E remove(int index);
 }
