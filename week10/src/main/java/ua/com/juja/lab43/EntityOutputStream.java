@@ -4,6 +4,7 @@ import java.io.*;
 
 public class EntityOutputStream implements EntityOutput {
     private final DataOutput out;
+
     public EntityOutputStream(OutputStream out) {
         this.out = new DataOutputStream(out);
     }
@@ -22,17 +23,20 @@ public class EntityOutputStream implements EntityOutput {
     @Override
     public void writePoint(Point point) throws IOException {
         int value = point.getX() << 4 | point.getY();
+
         out.writeByte(value);
     }
 }
 
 interface EntityInput {
     public Person readPerson() throws IOException;
+
     public Point readPoint() throws IOException;
 }
 
 interface EntityOutput {
     public void writePerson(Person person) throws IOException;
+
     public void writePoint(Point point) throws IOException;
 }
 
@@ -55,7 +59,7 @@ class Person {
 
     @Override
     public String toString() {
-        return "Person{name=" + name  + ", age=" + age + "}";
+        return "Person{name=" + name + ", age=" + age + "}";
     }
 }
 
@@ -93,13 +97,23 @@ class EntityInputStream implements EntityInput {
 
     /*BODY*/
 
+    public EntityInputStream(InputStream in) {
+        this.in = new DataInputStream(in);
+    }
+
     public Person readPerson() throws IOException {
-        return null;
+        int age = in.readInt();
+        String name = null;
+        if (in.readBoolean()) {
+            name = in.readUTF();
+        }
+        return new Person(name, age);
     }
 
     public Point readPoint() throws IOException {
-        return null;
-
+        int value = in.readUnsignedByte();
+        int x = value >> 4;
+        int y = value - (x << 4);
+        return new Point(x, y);
     }
-
 }
