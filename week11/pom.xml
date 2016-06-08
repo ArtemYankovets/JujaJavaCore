@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ua.com.juja</groupId>
-    <artifactId>java_core_week09_collections</artifactId>
+    <artifactId>java_core_week11_multithreading</artifactId>
     <version>1.0</version>
     <build>
         <plugins>
@@ -19,14 +19,6 @@
             </plugin>
         </plugins>
     </build>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
 
 </project>
