@@ -15,7 +15,7 @@ public class App3 {
 
         String s = "ava+v";
         String b = s.substring(3,4);
-        System.out.println(Integer.valueOf(b));
+//        System.out.println(Integer.valueOf(b));
 
         System.out.println(set);
         System.out.println(set.iterator().next());
