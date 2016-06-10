@@ -1,0 +1,17 @@
+# idea folder
+.idea/
+
+# target folder
+interview/target/
+week02/target/
+week05/target/
+week07/target/
+week08/target/
+week09/target/
+week10/target/
+week11/target/
+target/*
+
+
+# iml files
+*.iml
