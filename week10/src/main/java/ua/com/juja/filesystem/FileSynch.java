@@ -6,6 +6,6 @@ package ua.com.juja.filesystem;
             public void run() {
 
             }
-        })
+        });
 
 }
