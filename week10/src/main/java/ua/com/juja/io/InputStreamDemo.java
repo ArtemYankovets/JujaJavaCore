@@ -11,6 +11,11 @@ import java.util.zip.ZipInputStream;
  * Time: 6:28 PM
  */
 public class InputStreamDemo {
+    private static String srcPath = "week10\\tmp\\text.txt";
+    private static String dstPath = "week10\\tmp\\copy_text.txt";
+    private static String srcZipPath = "week10\\tmp\\text.zip";
+    private static String dstZipPath = "week10\\tmp\\copy_text.zip";
+
 
     public static void main(String[] args) throws IOException {
         class StringInputStream extends InputStream {
@@ -53,8 +58,8 @@ public class InputStreamDemo {
 //        is = new ByteArrayInputStream("Джуджа".getBytes());
 //        System.out.println(readStringFromInputStreamWithBuffer(is));
 //
-        System.out.println(readFromFile("text.txt"));
-//        System.out.println(readFromZipFile("text.zip", "text.txt"));
+        System.out.println(readFromFile(srcPath));
+        System.out.println(readFromZipFile(srcZipPath, srcPath));
 
 //        BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream("Джуджа".getBytes()));
 //        System.out.println(readStringFromInputStreamWithBuffer(bis));

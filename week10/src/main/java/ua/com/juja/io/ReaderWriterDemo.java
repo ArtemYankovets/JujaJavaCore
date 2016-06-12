@@ -10,12 +10,15 @@ import java.util.Arrays;
  * Time: 8:47 PM
  */
 public class ReaderWriterDemo {
+    private static String srcPath = "week10\\tmp\\text.txt";
+    private static String dstPath = "week10\\tmp\\copy_text.txt";
+
     public static void main(String[] args) throws IOException {
 //        System.out.println(readFromString());
 //        System.out.println(readFromFile());
 //        System.out.println(readFromFileByLines());
 
-//        copyFromFileToFileWithReaderAndWriter("text.txt", "copy_text.txt");
+        copyFromFileToFileWithReaderAndWriter(srcPath, dstPath);
         String line = "";
 
         while (!line.equals("\\q")) {
@@ -42,7 +45,7 @@ public class ReaderWriterDemo {
     }
 
     private static String readFromFileByLines() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("text.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader(srcPath));
         StringBuilder text = new StringBuilder();
         String line = null;
         while ((line = reader.readLine()) != null) {
@@ -55,7 +58,7 @@ public class ReaderWriterDemo {
     }
 
     private static String readFromFile() throws IOException {
-        FileReader fileReader = new FileReader("text.txt");
+        FileReader fileReader = new FileReader(srcPath);
         char[] buffer = new char[32];
         StringBuilder text = new StringBuilder();
         while (fileReader.read(buffer) != -1) {

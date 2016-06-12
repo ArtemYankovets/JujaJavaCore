@@ -12,6 +12,7 @@ week10/target/
 week11/target/
 target/*
 
+*tmp/
 
 # iml files
 *.iml

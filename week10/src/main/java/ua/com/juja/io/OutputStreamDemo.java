@@ -14,6 +14,10 @@ import java.util.zip.ZipOutputStream;
  * Time: 7:41 PM
  */
 public class OutputStreamDemo {
+    private static String srcPath = "week10\\tmp\\text.txt";
+    private static String dstPath = "week10\\tmp\\copy_text.txt";
+    private static String dstZipPath = "week10\\tmp\\copy_text.zip";
+
     public static void main(String[] args) throws IOException {
         OutputStream ous = new OutputStream() {
             byte[] bytes = new byte[1024];
@@ -37,8 +41,8 @@ public class OutputStreamDemo {
 //        ous.write(" Джуджа".getBytes());
 //        System.out.println(ous.toString());
 
-//        copyFromFileToAnother("text.txt", "copy_text.txt");
-        compressFileToZip("text.txt", "copy_text.zip");
+        copyFromFileToAnother(srcPath, dstPath);
+        compressFileToZip(srcPath, dstZipPath);
     }
 
     private static void compressFileToZip(String source, String destZip) throws IOException {
