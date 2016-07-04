@@ -7,12 +7,11 @@ public class Sample_Thread_Join {
 
         th.start();
 
-        th.join();
-
         for (int i = 0; i < 10; i++) {
-            Thread.sleep(500);
+            Thread.sleep(700);
             System.out.println("Bye");
         }
+        th.join();
         System.out.println("That's All!!!");
     }
 
@@ -27,7 +26,7 @@ public class Sample_Thread_Join {
         @Override
         public void run() {
             for (int i = 0; i < 10; i++) {
-                System.out.println("Hello");
+                System.out.println(name);
                 double d = 2.0;
                 for (int k = 0; k < 10_000_000; k++) {
                     d = Math.sin(d);
