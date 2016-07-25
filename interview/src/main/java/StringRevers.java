@@ -30,7 +30,6 @@ public class StringRevers {
         System.out.println("input string\t " + Arrays.toString(input.getBytes("UTF-32")));
         System.out.println("expected string\t " + Arrays.toString(expected.getBytes("UTF-32")));
         System.out.println("result string\t " + Arrays.toString(result3.getBytes("UTF-32")));
-
     }
 
     public static String reverse(String s) {
